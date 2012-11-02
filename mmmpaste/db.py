@@ -31,8 +31,7 @@ def new_paste(content, filename = None):
 
     hash = md5(content).hexdigest()
     dupe = session.query(Content).filter_by(hash = hash).first()
-    paste = Paste(content, filename)
-    paste.content = Content(content)
+    paste = Paste(Content(content), filename)
 
     if dupe is not None:
         paste.content = dupe

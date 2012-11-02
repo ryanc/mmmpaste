@@ -20,8 +20,8 @@ class Paste(Base):
     content = relationship("Content")
 
     def __init__(self, content, filename = None):
-        self.filename = filename
         self.content = content
+        self.filename = filename
 
     def __repr__(self):
         return "<Paste %r, %r, %r>" % (self.id, self.id_b62, self.filename)
