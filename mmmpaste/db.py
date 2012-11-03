@@ -39,3 +39,7 @@ def new_paste(content, filename = None):
     session.add(paste)
     session.commit()
 
+
+def get_paste(id):
+    from mmmpaste.models import Paste
+    return session.query(Paste).filter_by(id = id).first()
