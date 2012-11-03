@@ -26,6 +26,9 @@ class Paste(Base):
     def __repr__(self):
         return "<Paste %r, %r, %r>" % (self.id, self.id_b62, self.filename)
 
+    def __str__(self):
+        return str(self.content)
+
 class Content(Base):
     __tablename__ = "paste_content"
 
@@ -43,3 +46,5 @@ class Content(Base):
         truncated = (self.content[:25] + "...") if len(self.content) > 25 \
                                                 else self.content
         return "<Content %r %r %r>" % (self.id, self.hash, truncated)
+    def __str__(self):
+        return self.content
