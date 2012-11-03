@@ -28,10 +28,5 @@ class TestBase62Functions(unittest.TestCase):
         for i in range(100):
             self.assertEquals(i, b62_decode(b62_encode(i)))
 
-class TestNothing(unittest.TestCase):
-
-    def test_nothing(self):
-        self.assertTrue(True)
-
 if __name__ == "__main__":
     unittest.main()
