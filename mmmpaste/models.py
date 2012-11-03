@@ -29,6 +29,7 @@ class Paste(Base):
     def __str__(self):
         return str(self.content)
 
+
 class Content(Base):
     __tablename__ = "paste_content"
 

@@ -19,12 +19,14 @@ def init_db():
     from mmmpaste.models import Paste
     Base.metadata.create_all()
 
+
 def nuke_db():
     """
     Drop the bass.
     """
     from mmmpaste.models import Paste
     Base.metadata.drop_all()
+
 
 def new_paste(content, filename = None):
     from mmmpaste.models import Paste, Content
