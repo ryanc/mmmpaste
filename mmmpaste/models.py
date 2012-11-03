@@ -46,5 +46,6 @@ class Content(Base):
         truncated = (self.content[:25] + "...") if len(self.content) > 25 \
                                                 else self.content
         return "<Content %r %r %r>" % (self.id, self.hash, truncated)
+
     def __str__(self):
         return self.content
