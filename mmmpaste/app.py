@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, abort
 
 from mmmpaste import db
-from mmmpaste.forms import NewPasteForm
+from mmmpaste.forms import NewPaste
 
 app = Flask(__name__)
 
