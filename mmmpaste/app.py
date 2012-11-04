@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, redirect, abort
+from flask import Flask, render_template, request, redirect, abort, url_for
 
-from mmmpaste import db
 from mmmpaste.forms import NewPaste
 
 app = Flask(__name__)
@@ -19,6 +18,15 @@ def get_paste(id):
     if paste is None:
         abort(404)
     return render_template("paste.html", paste = paste)
+
+@app.route("/new", methods = ["POST", "GET"])
+def new_paste():
+    form = NewPaste(request.form)
+    if request.method == "POST" and form.validate():
+        id = db.new_paste(form.content.data, form.filename.data)
+        return redirect(url_for("get_paste", id = id))
+
+    return render_template("new.html", form = form)
 
 @app.route("/history")
 def history():
