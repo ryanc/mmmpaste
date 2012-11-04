@@ -4,7 +4,11 @@
 
 <form action="{{ url_for('new_paste') }}" method="post">
 
-  {% if form.errors %}{{ form.errors }}{% endif %}
+  {% for field, field_errors in form.errors|dictsort %}
+    {% for error in field_errors %}
+    <p>{{ form[field].label }}: {{ error }}</p>
+    {% endfor %}
+  {% endfor %}
   
   {{ form.content(id = "paste_content") }}
 
