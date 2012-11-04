@@ -3,7 +3,7 @@ import datetime
 from hashlib import md5
 
 from sqlalchemy.schema import Column, ForeignKey
-from sqlalchemy.types import DateTime, Integer, String, Text, CHAR
+from sqlalchemy.types import DateTime, Integer, String, Text, CHAR, Boolean
 from sqlalchemy.orm import relationship, backref
 
 from mmmpaste.db import Base
@@ -17,6 +17,7 @@ class Paste(Base):
     content_id = Column(Integer, ForeignKey('paste_content.id'))
     created_at = Column(DateTime, nullable = False, default = datetime.datetime.now)
     modified_at = Column(DateTime, onupdate = datetime.datetime.now)
+    highlight = Column(Boolean, nullable = False, default = True)
     content = relationship("Content")
 
     def __init__(self, content, filename = None):
