@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, abort, url_for
 
+from mmmpaste import db
 from mmmpaste.forms import NewPaste
 
 app = Flask(__name__)
