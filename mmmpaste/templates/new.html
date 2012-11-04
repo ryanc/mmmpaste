@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action="{{ url_for('new_paste') }}" method="post">
+
+  {% if form.errors %}{{ form.errors }}{% endif %}
+  
+  {{ form.content(id = "paste_content") }}
+
+  <div class="right">
+    <p>
+      <span class="group">
+        {{ form.highlight.label }}
+        {{ form.highlight | safe }}
+      </span>
+
+      <span class="group">
+        {{ form.convert_tabs.label }}
+        {{ form.convert_tabs | safe }}
+      </span>
+    </p>
+
+    <p>
+      {{ form.filename | safe }}
+      <button class="button-main" id="submit" type="submit">Paste It</button>
+    </p>
+  </div>
+
+</form>
+{% endblock %}
