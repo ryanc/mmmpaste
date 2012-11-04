@@ -11,4 +11,12 @@ def shutdown_session(exception = None):
 
 @app.route("/")
 def root():
-    return "Nothing to see here, move along."
+    pass
+
+@app.route("/history")
+def history():
+    pass
+
+@app.route("/about")
+def about():
+    pass
