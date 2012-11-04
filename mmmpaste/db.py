@@ -30,10 +30,11 @@ def nuke_db():
 
 def new_paste(content, filename = None):
     from mmmpaste.models import Paste, Content
+    from mmmpaste.base62 import b62_encode
 
     hash = md5(content).hexdigest()
     dupe = session.query(Content).filter_by(hash = hash).first()
-    paste = Paste(Content(content), filename)
+    paste = Paste(content, filename)
 
     if dupe is not None:
         paste.content = dupe
@@ -41,7 +42,12 @@ def new_paste(content, filename = None):
     session.add(paste)
     session.commit()
 
+    paste.id_b62 = b62_encode(paste.id)
+    session.commit()
 
-def get_paste(id):
+    return paste.id_b62
+
+
+def get_paste(id_b62):
     from mmmpaste.models import Paste
-    return session.query(Paste).filter_by(id = id).first()
+    return session.query(Paste).filter_by(id_b62 = id_b62).first()
