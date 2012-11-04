@@ -62,9 +62,9 @@ $(document).ready(function() {
     </select>
   </div>
   <ul id="pasteOptions">
-    <li><a class="smooth-button" href="/p/{{ id | e }}/raw">Raw</a></li>
-    <li><a class="smooth-button" href="/p/{{ id | e }}/download">Download</a></li>
-    <li><a class="smooth-button" href="/p/{{ id | e }}/clone">Clone</a></li>
+    <li><a class="smooth-button" href="{{ url_for('get_raw_paste', id = paste.id_b62) }}">Raw</a></li>
+    <li><a class="smooth-button" href="{{ url_for('download_paste', id = paste.id_b62) }}">Download</a></li>
+    <li><a class="smooth-button" href="{{ url_for('clone_paste', id = paste.id_b62) }}">Clone</a></li>
   </ul>
 </div>
 <div class="clear"></div>
