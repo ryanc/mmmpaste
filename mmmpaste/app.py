@@ -12,7 +12,7 @@ def shutdown_session(exception = None):
 
 @app.route("/")
 def root():
-    pass
+    return redirect(url_for("new_paste"))
 
 
 @app.route("/p/<id>")
