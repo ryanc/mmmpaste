@@ -40,7 +40,7 @@ def new_paste(content, filename = None):
         paste.content = dupe
 
     session.add(paste)
-    session.commit()
+    session.flush()
 
     paste.id_b62 = b62_encode(paste.id)
     session.commit()
