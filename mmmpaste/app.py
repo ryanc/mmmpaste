@@ -57,6 +57,7 @@ def download_paste(id):
 def clone_paste(id):
     pass
 
+
 @app.route("/latest")
 def get_last_past():
     pass
