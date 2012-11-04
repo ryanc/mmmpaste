@@ -1,6 +1,7 @@
 from flask import Flask
 
 from mmmpaste import db
+from mmmpaste.forms import NewPasteForm
 
 app = Flask(__name__)
 
