@@ -28,13 +28,15 @@ def nuke_db():
     Base.metadata.drop_all()
 
 
-def new_paste(content, filename = None, highlight = True):
+def new_paste(content, filename = None, highlight = True, convert_tabs = True):
     from mmmpaste.models import Paste, Content
     from mmmpaste.base62 import b62_encode
 
-    hash = md5(content).hexdigest()
+    paste = Paste(filename, highlight)
+    paste.content = Content(content, convert_tabs)
+
+    hash = md5(str(paste.content)).hexdigest()
     dupe = session.query(Content).filter_by(hash = hash).first()
-    paste = Paste(content, filename, highlight)
 
     if dupe is not None:
         paste.content = dupe
