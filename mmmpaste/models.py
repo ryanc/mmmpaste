@@ -20,9 +20,10 @@ class Paste(Base):
     highlight = Column(Boolean, nullable = False, default = True)
     content = relationship("Content")
 
-    def __init__(self, content, filename = None):
+    def __init__(self, content, filename = None, highlight = True):
         self.content = Content(content)
         self.filename = filename
+        self.highlight = highlight
 
     def __repr__(self):
         return "<Paste %r, %r, %r>" % (self.id, self.id_b62, self.filename)
