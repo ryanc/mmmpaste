@@ -27,3 +27,15 @@ def history():
 @app.route("/about")
 def about():
     pass
+
+@app.route("/p/<id>/raw")
+def get_raw_paste(id):
+    pass
+
+@app.route("/p/<id>/download")
+def download_paste(id):
+    pass
+
+@app.route("/p/<id>/clone")
+def clone_paste(id):
+    pass
