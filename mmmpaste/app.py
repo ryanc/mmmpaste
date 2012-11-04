@@ -9,9 +9,11 @@ app = Flask(__name__)
 def shutdown_session(exception = None):
     db.session.remove()
 
+
 @app.route("/")
 def root():
     pass
+
 
 @app.route("/p/<id>")
 def get_paste(id):
@@ -19,6 +21,7 @@ def get_paste(id):
     if paste is None:
         abort(404)
     return render_template("paste.html", paste = paste)
+
 
 @app.route("/new", methods = ["POST", "GET"])
 def new_paste():
@@ -29,21 +32,26 @@ def new_paste():
 
     return render_template("new.html", form = form)
 
+
 @app.route("/history")
 def history():
     pass
+
 
 @app.route("/about")
 def about():
     pass
 
+
 @app.route("/p/<id>/raw")
 def get_raw_paste(id):
     pass
 
+
 @app.route("/p/<id>/download")
 def download_paste(id):
     pass
+
 
 @app.route("/p/<id>/clone")
 def clone_paste(id):
