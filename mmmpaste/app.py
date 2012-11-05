@@ -60,5 +60,6 @@ def clone_paste(id):
 
 
 @app.route("/latest")
-    pass
 def get_latest_paste():
+    paste = db.get_paste()
+    return render_template("paste.html", paste = paste)
