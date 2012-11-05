@@ -55,7 +55,15 @@ def get_raw_paste(id):
 
 @app.route("/p/<id>/download")
 def download_paste(id):
-    pass
+    paste = db.get_paste(id)
+    filename = paste.filename
+
+    if filename is None:
+        filename = "paste-%s.txt" % paste.id_b62
+
+    response = make_response(str(paste.content))
+    response.headers["Content-Disposition"] = "attachment; filename=%s" % filename
+    return response
 
 
 @app.route("/p/<id>/clone")
