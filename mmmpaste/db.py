@@ -1,3 +1,5 @@
+import contextlib
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -26,6 +28,18 @@ def nuke_db():
     """
     from mmmpaste.models import Paste
     Base.metadata.drop_all()
+
+
+def empty_db():
+    """
+    Clear the tables, but do not drop the schema.
+    """
+    from mmmpaste.models import Paste, Content
+    with contextlib.closing(engine.connect()) as conn:
+        transaction = conn.begin()
+        for table in reversed(Base.metadata.sorted_tables):
+            conn.execute(table.delete())
+        transaction.commit()
 
 
 def new_paste(content, filename = None, highlight = True, convert_tabs = True):
