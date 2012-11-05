@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, abort, url_for
+from flask import Flask, render_template, request, redirect, abort, url_for, \
+                  make_response
 
 from mmmpaste import db
 from mmmpaste.forms import NewPaste
@@ -46,7 +47,10 @@ def about():
 
 @app.route("/p/<id>/raw")
 def get_raw_paste(id):
-    pass
+    paste = db.get_paste(id)
+    response = make_response(str(paste.content))
+    response.mimetype = "text/plain"
+    return response
 
 
 @app.route("/p/<id>/download")
