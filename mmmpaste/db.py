@@ -55,12 +55,7 @@ def get_paste(id_b62 = None):
     Get the paste for the given base 62 id.
     """
     from mmmpaste.models import Paste
+    if id_b62 is None:
+        return session.query(Paste).order_by(Paste.id.desc()).first()
+
     return session.query(Paste).filter_by(id_b62 = id_b62).first()
-
-
-def get_paste():
-    """
-    Get the most recently added paste.
-    """
-    from mmmpaste.models import Paste
-    return session.query(Paste).order_by(Paste.id.desc()).first()
