@@ -19,8 +19,10 @@ def root():
 @app.route("/p/<id>")
 def get_paste(id):
     paste = db.get_paste(id)
+
     if paste is None:
         abort(404)
+
     return render_template("paste.html", paste = paste)
 
 
@@ -48,6 +50,10 @@ def about():
 @app.route("/p/<id>/raw")
 def get_raw_paste(id):
     paste = db.get_paste(id)
+
+    if paste is None:
+        return abort(404)
+
     response = make_response(str(paste.content))
     response.mimetype = "text/plain"
     return response
@@ -56,6 +62,10 @@ def get_raw_paste(id):
 @app.route("/p/<id>/download")
 def download_paste(id):
     paste = db.get_paste(id)
+
+    if paste is None:
+        return abort(404)
+
     filename = paste.filename
 
     if filename is None:
@@ -69,6 +79,10 @@ def download_paste(id):
 @app.route("/p/<id>/clone")
 def clone_paste(id):
     paste = db.get_paste(id)
+
+    if paste is None:
+        return abort(404)
+
     form = NewPaste()
     form.content.data = str(paste.content)
     return render_template("new.html", form = form)
