@@ -2,14 +2,14 @@
 
 {% block css %}
 {{ super() }}
-<link type="text/css" rel="stylesheet" href="/css/themes/{{ theme }}.css" class="theme">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/themes/ir_black.css') }}" class="theme">
 <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro">
 {% endblock %}
 
 {% block javascript %}
-<script src="/js/zepto.min.js"></script>
-<script src="/js/zepto.cookie.min.js"></script>
-<script src="/js/highlight.pack.js"></script>
+<script src="{{ url_for('static', filename='js/zepto.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/zepto.cookie.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/highlight.pack.js') }}"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
@@ -18,13 +18,13 @@
 $(document).ready(function() {
   if ($.fn.cookie("theme")) {
     theme = $.fn.cookie("theme");
-    $("link.theme").attr("href", "/css/themes/" + theme);
+    $("link.theme").attr("href", "/static/css/themes/" + theme);
     $(".theme-switcher").val(theme);
   }
 
   $(".theme-switcher").change(function() {
     theme = $(this).val();
-    $("link.theme").attr("href", "/css/themes/" + theme);
+    $("link.theme").attr("href", "/static/css/themes/" + theme);
     $.fn.cookie("theme", theme);
   });
 });
