@@ -68,7 +68,10 @@ def download_paste(id):
 
 @app.route("/p/<id>/clone")
 def clone_paste(id):
-    pass
+    paste = db.get_paste(id)
+    form = NewPaste()
+    form.content.data = str(paste.content)
+    return render_template("new.html", form = form)
 
 
 @app.route("/latest")
