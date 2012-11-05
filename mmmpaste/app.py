@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, abort, url_for, \
                   make_response
 
 from mmmpaste import db
-from mmmpaste.forms import NewPaste
+from mmmpaste import forms
 
 app = Flask(__name__)
 
@@ -28,7 +28,7 @@ def get_paste(id):
 
 @app.route("/new", methods = ["POST", "GET"])
 def new_paste():
-    form = NewPaste(request.form)
+    form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
         id = db.new_paste(form.content.data, form.filename.data,
                           form.highlight.data, form.convert_tabs.data)
@@ -83,7 +83,7 @@ def clone_paste(id):
     if paste is None:
         return abort(404)
 
-    form = NewPaste()
+    form = forms.NewPaste()
     form.content.data = str(paste.content)
     return render_template("new.html", form = form)
 
