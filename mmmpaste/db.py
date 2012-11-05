@@ -35,7 +35,7 @@ def new_paste(content, filename = None, highlight = True, convert_tabs = True):
     paste = Paste(filename, highlight)
     paste.content = Content(content, convert_tabs)
 
-    hash = md5(str(paste.content)).hexdigest()
+    hash = paste.content.hash
     dupe = session.query(Content).filter_by(hash = hash).first()
 
     if dupe is not None:

@@ -47,7 +47,6 @@ class Content(Base):
     def __init__(self, content, convert_tabs = True):
         self.convert_tabs = convert_tabs
         self.content = content
-        self.hash = md5(content).hexdigest()
 
     def __repr__(self):
         truncated = (self.content[:25] + "...") if len(self.content) > 25 \
@@ -59,10 +58,14 @@ class Content(Base):
 
 
 def tabs_to_spaces(target, value, oldvalue, initiator):
-    if target.convert_tabs:
-        return re.sub(r"\t", " " * 4, value)
+    content = value
 
-    return value
+    if target.convert_tabs:
+        content = re.sub(r"\t", " " * 4, content)
+
+    target.hash = md5(content).hexdigest()
+
+    return content
 
 
 event.listen(Content.content, "set", tabs_to_spaces, retval = True)
