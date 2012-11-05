@@ -18,7 +18,7 @@ def init_db():
 
     Nothing happens when the database already exists.
     """
-    from mmmpaste.models import Paste
+    from mmmpaste.models import Paste, Content
     Base.metadata.create_all()
 
 
@@ -26,7 +26,7 @@ def nuke_db():
     """
     Drop the bass.
     """
-    from mmmpaste.models import Paste
+    from mmmpaste.models import Paste, Content
     Base.metadata.drop_all()
 
 
