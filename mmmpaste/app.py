@@ -91,4 +91,4 @@ def clone_paste(id):
 @app.route("/latest")
 def get_latest_paste():
     paste = db.get_paste()
-    return render_template("paste.html", paste = paste)
+    return redirect(url_for("get_paste", id = paste.id_b62), 307)
