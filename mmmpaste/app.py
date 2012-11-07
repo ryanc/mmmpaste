@@ -4,11 +4,21 @@ from flask import Flask, render_template, request, redirect, abort, url_for, \
 from mmmpaste import db
 from mmmpaste import forms
 
+from functools import update_wrapper
+
 app = Flask(__name__)
 
 @app.teardown_request
 def shutdown_session(exception = None):
     db.session.remove()
+
+
+def cache(f):
+    def new_func(*args, **kwargs):
+        response = make_response(f(*args, **kwargs))
+        response.cache_control.s_maxage = 86400
+        return response
+    return update_wrapper(new_func, f)
 
 
 @app.route("/")
@@ -17,6 +27,7 @@ def root():
 
 
 @app.route("/p/<id>")
+@cache
 def get_paste(id):
     paste = db.get_paste(id)
 
@@ -48,6 +59,7 @@ def about():
 
 
 @app.route("/p/<id>/raw")
+@cache
 def get_raw_paste(id):
     paste = db.get_paste(id)
 
@@ -60,6 +72,7 @@ def get_raw_paste(id):
 
 
 @app.route("/p/<id>/download")
+@cache
 def download_paste(id):
     paste = db.get_paste(id)
 
