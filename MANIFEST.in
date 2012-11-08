@@ -1,0 +1,2 @@
+recursive-include mmmpaste/templates *
+recursive-include mmmpaste/static *
