@@ -20,9 +20,11 @@ class Paste(Base):
     created_at = Column(DateTime, nullable = False, default = datetime.datetime.now)
     modified_at = Column(DateTime, onupdate = datetime.datetime.now)
     highlight = Column(Boolean, nullable = False, default = True)
+    ip_addr = Column(String(39), nullable = False)
     content = relationship("Content")
 
-    def __init__(self, filename = None, highlight = True):
+    def __init__(self, ip_addr, filename = None, highlight = True):
+        self.ip_addr = ip_addr
         self.filename = filename
         self.highlight = highlight
 

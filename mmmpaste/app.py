@@ -41,8 +41,9 @@ def get_paste(id):
 def new_paste():
     form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
-        id = db.new_paste(form.content.data, form.filename.data,
-                          form.highlight.data, form.convert_tabs.data)
+        id = db.new_paste(form.content.data, request.remote_addr,
+                          form.filename.data, form.highlight.data,
+                          form.convert_tabs.data)
         return redirect(url_for("get_paste", id = id))
 
     return render_template("new.html", form = form)

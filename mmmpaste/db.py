@@ -42,11 +42,11 @@ def empty_db():
         transaction.commit()
 
 
-def new_paste(content, filename = None, highlight = True, convert_tabs = True):
+def new_paste(content, ip_addr, filename = None, highlight = True, convert_tabs = True):
     from mmmpaste.models import Paste, Content
     from mmmpaste.base62 import b62_encode
 
-    paste = Paste(filename, highlight)
+    paste = Paste(ip_addr, filename, highlight)
     paste.content = Content(content, convert_tabs)
 
     hash = paste.content.hash
