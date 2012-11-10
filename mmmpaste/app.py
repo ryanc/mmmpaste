@@ -21,6 +21,12 @@ def cache(f):
     return update_wrapper(new_func, f)
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    error = "Page not found :("
+    return render_template("error.html", error = error), 404
+
+
 @app.route("/")
 def root():
     return redirect(url_for("new_paste"))
