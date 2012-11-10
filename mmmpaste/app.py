@@ -32,6 +32,7 @@ def page_not_found(e):
     error = "The system is down. The system is down."
     return render_template("error.html", error = error), 500
 
+
 @app.route("/")
 def root():
     return redirect(url_for("new_paste"))
