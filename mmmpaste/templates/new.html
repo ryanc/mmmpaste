@@ -1,26 +1,23 @@
+{% from "_form_helpers.html" import form_label, field_errors %}
+
 {% extends "layout.html" %}
 
 {% block content %}
 
 <form action="{{ url_for('new_paste') }}" method="post">
+  {{ field_errors(form.content) }}
 
-  {% for field, field_errors in form.errors|dictsort %}
-    {% for error in field_errors %}
-    <p>{{ form[field].label }}: {{ error }}</p>
-    {% endfor %}
-  {% endfor %}
-  
   {{ form.content(id = "paste_content") }}
 
   <div class="right">
     <p>
       <span class="group">
-        {{ form.highlight.label }}
+        {{ form_label(form.highlight) }}
         {{ form.highlight | safe }}
       </span>
 
       <span class="group">
-        {{ form.convert_tabs.label }}
+        {{ form_label(form.convert_tabs) }}
         {{ form.convert_tabs | safe }}
       </span>
     </p>
