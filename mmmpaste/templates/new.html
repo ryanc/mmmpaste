@@ -23,7 +23,7 @@
     </p>
 
     <p>
-      {{ form.filename | safe }}
+      {{ form.filename(placeholder = "Optional filename ...") | safe }}
       <button class="button-main" id="submit" type="submit">Paste It</button>
     </p>
   </div>
