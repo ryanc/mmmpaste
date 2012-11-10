@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, \
-                  make_response
+                  make_response, session
 
 from mmmpaste import db
 from mmmpaste import forms
@@ -56,6 +56,13 @@ def new_paste():
         id = db.new_paste(form.content.data, request.remote_addr,
                           form.filename.data, form.highlight.data,
                           form.convert_tabs.data)
+        if "pastes" not in session:
+            session["pastes"] = []
+
+        pastes = session["pastes"]
+        pastes.append(id)
+        session["paste"] = pastes
+
         return redirect(url_for("get_paste", id = id))
 
     return render_template("new.html", form = form)
