@@ -1,8 +1,11 @@
 {% from "_form_helpers.html" import form_label, field_errors %}
+{% from "_messages.html" import messages %}
 
 {% extends "layout.html" %}
 
 {% block content %}
+
+{{ messages(get_flashed_messages()) }}
 
 <form action="{{ url_for('new_paste') }}" method="post">
   {{ field_errors(form.content) }}
