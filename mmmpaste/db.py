@@ -73,3 +73,12 @@ def get_paste(id_b62 = None):
         return session.query(Paste).order_by(Paste.id.desc()).first()
 
     return session.query(Paste).filter_by(id_b62 = id_b62).first()
+
+
+def delete_paste(id_b62 = None):
+    """
+    Delete the paste.
+    """
+    from mmmpaste.models import Paste
+    session.query(Paste).filter_by(id_b62 = id_b62).delete()
+    session.commit()
