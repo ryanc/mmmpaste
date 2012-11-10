@@ -1,0 +1,11 @@
+{% macro messages(messages) %}
+{% with messages = messages %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% endmacro %}
