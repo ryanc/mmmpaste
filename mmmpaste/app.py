@@ -27,7 +27,7 @@ def no_cache(f):
 def cache(f):
     def new_func(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
-        response.cache_control.s_maxage = 86400
+        response.cache_control.s_maxage = app.config.get('CACHE_S_MAXAGE')
         return response
     return update_wrapper(new_func, f)
 
