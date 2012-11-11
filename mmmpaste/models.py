@@ -21,6 +21,7 @@ class Paste(Base):
     modified_at = Column(DateTime, onupdate = datetime.datetime.now)
     highlight = Column(Boolean, nullable = False, default = True)
     ip_addr = Column(String(39), nullable = False)
+    is_active = Column(Boolean, nullable = False, default = True)
     content = relationship("Content")
 
     def __init__(self, ip_addr, filename = None, highlight = True):

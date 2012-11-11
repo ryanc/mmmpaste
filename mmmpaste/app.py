@@ -53,8 +53,9 @@ def root():
 def get_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None:
-        abort(404)
+    if paste is None or paste.is_active is False:
+        error = "This paste is no longer available."
+        return render_template("error.html", error = error)
 
     return render_template("paste.html", paste = paste)
 
@@ -138,7 +139,7 @@ def delete_paste(id):
         error = "You do not have permission to delete this paste."
         return render_template("error.html", error = error), 403
 
-    db.delete_paste(id)
+    db.deactivate_paste(id)
     flash("The paste has been deleted.")
     return redirect(url_for("new_paste"))
 

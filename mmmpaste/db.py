@@ -82,3 +82,13 @@ def delete_paste(id_b62 = None):
     from mmmpaste.models import Paste
     session.query(Paste).filter_by(id_b62 = id_b62).delete()
     session.commit()
+
+
+def deactivate_paste(id_b62 = None):
+    """
+    Deactivate the paste.
+    """
+    from mmmpaste.models import Paste
+    paste = session.query(Paste).filter_by(id_b62 = id_b62).first()
+    paste.is_active = False
+    session.commit()
