@@ -2,3 +2,4 @@ venv
 *.pyc
 db/*.db
 log/*.log
+local_settings.py
