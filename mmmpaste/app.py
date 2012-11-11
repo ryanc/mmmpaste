@@ -18,6 +18,14 @@ def shutdown_session(exception = None):
 def cache(f):
     def new_func(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
+        response.cache_control.no_cache = True
+        return response
+    return update_wrapper(new_func, f)
+
+
+def no_cache(f):
+    def new_func(*args, **kwargs):
+        response = make_response(f(*args, **kwargs))
         response.cache_control.s_maxage = 86400
         return response
     return update_wrapper(new_func, f)
@@ -52,6 +60,7 @@ def get_paste(id):
 
 
 @app.route("/new", methods = ["POST", "GET"])
+@no_cache
 def new_paste():
     form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
