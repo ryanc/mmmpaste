@@ -72,7 +72,10 @@ $(document).ready(function() {
   {% if paste.highlight %}
   <pre><code>{{ paste.content | e }}</code></pre>
   {% else %}
+  <!--
   <pre><code class="no-highlight">{{ paste.content | e }}</code></pre>
+  -->
+  <pre>{{ paste.content | e }}</pre>
   {% endif %}
 </div>
 <!-- Digest: {{ paste.content.hash }} -->

@@ -98,7 +98,7 @@ textarea {
 pre {
   margin: 0;
 }
-pre code {
+pre, pre code {
   white-space: pre;
   overflow: auto;
   font-family: "Source Code Pro", monospace;
