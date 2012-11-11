@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, \
-                  make_response, session
+                  make_response, session, flash
 
 from mmmpaste import db
 from mmmpaste import forms
@@ -122,6 +122,17 @@ def clone_paste(id):
     form = forms.NewPaste()
     form.content.data = str(paste.content)
     return render_template("new.html", form = form)
+
+
+@app.route("/p/<id>/delete")
+def delete_paste(id):
+    if id not in session["pastes"]:
+        error = "You do not have permission to delete this paste."
+        return render_template("error.html", error = error), 403
+
+    db.delete_paste(id)
+    flash("The paste has been deleted.")
+    return redirect(url_for("new_paste"))
 
 
 @app.route("/latest")
