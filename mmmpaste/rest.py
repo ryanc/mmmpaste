@@ -21,7 +21,7 @@ def new_paste():
                       convert_tabs)
 
     response = make_response("", 201)
-    response.headers["Location"] = url_for(".get_paste", id = id)
+    response.headers["Location"] = url_for("get_paste", id = id)
     return response
 
 
