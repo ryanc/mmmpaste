@@ -1,11 +1,13 @@
 {% macro messages(messages) %}
 {% with messages = messages %}
   {% if messages %}
+  <div class="alert alert-success">
     <ul class="flashes">
     {% for message in messages %}
       <li>{{ message }}</li>
     {% endfor %}
     </ul>
+  </div>
   {% endif %}
 {% endwith %}
 {% endmacro %}
