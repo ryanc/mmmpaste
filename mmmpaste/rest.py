@@ -12,13 +12,11 @@ def shutdown_session(exception = None):
 
 @rest.route("/api/paste", methods = ["POST"])
 def new_paste():
-    content = request.form.get("content")
-    filename = request.form.get("filename", None)
-    highlight = request.form.get("highlight", True)
-    convert_tabs = request.form.get("convert_tabs", True)
-
-    id = db.new_paste(content, request.remote_addr, filename, highlight,
-                      convert_tabs)
+    id = db.new_paste(request.form.get("content"),
+                      request.remote_addr,
+                      request.form.get("filename", None),
+                      request.form.get("highlight", True),
+                      request.form.get("convert_tabs", True))
 
     response = make_response("", 201)
     response.headers["Location"] = url_for("get_paste", id = id)
