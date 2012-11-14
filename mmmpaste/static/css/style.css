@@ -260,18 +260,6 @@ label {
   font-weight: bold;
 }
 
-.alert-success {
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-}
-
-.alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
-}
-
 .alert {
   color: #c09853;
   background-color: #fcf8e3;
@@ -282,4 +270,16 @@ label {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.alert-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
 }
