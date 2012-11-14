@@ -35,7 +35,7 @@
   margin-bottom: 20px;
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
@@ -85,9 +85,6 @@ a {
 .smooth-button:active {
   background-color: #F2F2F2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) inset;
-}
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 textarea {
   width: 100%;
