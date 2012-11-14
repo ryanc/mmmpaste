@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'mmmpaste',
-    version = '1.0',
+    version = '1.0dev',
     long_description = __doc__,
     packages = ['mmmpaste'],
     include_package_data = True,
