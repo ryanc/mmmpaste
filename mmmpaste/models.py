@@ -5,7 +5,7 @@ from hashlib import md5
 
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import DateTime, Integer, String, Text, CHAR, Boolean
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship, backref, validates
 from sqlalchemy import event
 
 from mmmpaste.db import Base
@@ -58,6 +58,11 @@ class Content(Base):
 
     def __str__(self):
         return self.content
+
+    @validates("content")
+    def validate_content(self, key, content):
+        assert content.strip() != ""
+        return content
 
 
 def tabs_to_spaces(target, value, oldvalue, initiator):
