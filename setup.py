@@ -12,4 +12,9 @@ setup(
         'SQLAlchemy==0.7.9',
         'WTForms==1.0.2',
     ],
+    entry_points = {
+        'console_scripts': [
+            'mmmpaste = mmmpaste.client:main',
+        ],
+    },
 )
