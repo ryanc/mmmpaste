@@ -272,6 +272,12 @@ label {
   border-color: #eed3d7;
 }
 
+.alert {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
 .alert ul {
   margin: 0;
   padding: 0;
