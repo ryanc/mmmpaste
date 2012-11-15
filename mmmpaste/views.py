@@ -1,15 +1,12 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, \
                   make_response, session, flash
 
+from mmmpaste import app
 from mmmpaste import db
 from mmmpaste import forms
 from mmmpaste.rest import rest
 
 from functools import update_wrapper
-
-app = Flask(__name__, instance_relative_config = True)
-app.config.from_object("mmmpaste.default_settings")
-app.config.from_object("local_settings")
 
 # Register the REST API module.
 app.register_blueprint(rest)
