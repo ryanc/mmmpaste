@@ -14,7 +14,7 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
-            'mmmpaste = mmmpaste.client:main',
+            'mmmpaste-client = mmmpaste.client:main',
         ],
     },
 )
