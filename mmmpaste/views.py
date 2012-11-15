@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, abort, url_for, \
 from mmmpaste import app
 from mmmpaste import db
 from mmmpaste import forms
+from mmmpaste import filters
 from mmmpaste.rest import rest
 
 from functools import update_wrapper
@@ -15,22 +16,6 @@ app.register_blueprint(rest)
 @app.teardown_request
 def shutdown_session(exception = None):
     db.session.remove()
-
-
-def no_cache(f):
-    def new_func(*args, **kwargs):
-        response = make_response(f(*args, **kwargs))
-        response.cache_control.no_cache = True
-        return response
-    return update_wrapper(new_func, f)
-
-
-def cache(f):
-    def new_func(*args, **kwargs):
-        response = make_response(f(*args, **kwargs))
-        response.cache_control.s_maxage = app.config.get('CACHE_S_MAXAGE')
-        return response
-    return update_wrapper(new_func, f)
 
 
 @app.errorhandler(404)
@@ -51,7 +36,7 @@ def root():
 
 
 @app.route("/p/<id>")
-@cache
+@filters.cache
 def get_paste(id):
     paste = db.get_paste(id)
 
@@ -63,7 +48,7 @@ def get_paste(id):
 
 
 @app.route("/new", methods = ["POST", "GET"])
-@no_cache
+@filters.no_cache
 def new_paste():
     form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
@@ -93,7 +78,7 @@ def about():
 
 
 @app.route("/p/<id>/raw")
-@cache
+@filters.cache
 def get_raw_paste(id):
     paste = db.get_paste(id)
 
@@ -107,7 +92,7 @@ def get_raw_paste(id):
 
 
 @app.route("/p/<id>/download")
-@cache
+@filters.cache
 def download_paste(id):
     paste = db.get_paste(id)
 

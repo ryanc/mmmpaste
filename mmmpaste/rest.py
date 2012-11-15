@@ -1,6 +1,6 @@
 from flask import Blueprint, abort, make_response, request, url_for
 
-from mmmpaste import db
+from mmmpaste import db, filters
 
 rest = Blueprint("rest", __name__)
 
@@ -24,6 +24,7 @@ def new_paste():
 
 
 @rest.route("/api/paste/<id>", methods = ["GET"])
+@filters.cache
 def get_paste(id):
     paste = db.get_paste(id)
 
