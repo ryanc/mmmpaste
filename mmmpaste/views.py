@@ -1,13 +1,8 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, \
                   make_response, session, flash
 
-from mmmpaste import app
-from mmmpaste import db
-from mmmpaste import forms
-from mmmpaste import filters
+from mmmpaste import app, db, forms, filters
 from mmmpaste.rest import rest
-
-from functools import update_wrapper
 
 # Register the REST API module.
 app.register_blueprint(rest)

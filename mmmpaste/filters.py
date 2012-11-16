@@ -1,8 +1,9 @@
-from flask import make_response
 from functools import update_wrapper, wraps
 from time import time as now
-from mmmpaste import app
 
+from flask import make_response
+
+from mmmpaste import app
 
 def runtime(f):
     """
