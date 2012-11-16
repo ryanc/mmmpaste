@@ -13,7 +13,7 @@ def runtime(f):
         start = now()
         response = make_response(f(*args, **kwargs))
         end = now()
-        response.headers["X-Runtime"] = "%ss" % str(end - start)
+        response.headers["X-Runtime"] = "{0}s".format(end - start)
         return response
     return wrapper
 
