@@ -1,4 +1,4 @@
-from functools import update_wrapper, wraps
+from functools import wraps
 from time import time as now
 
 from flask import make_response
