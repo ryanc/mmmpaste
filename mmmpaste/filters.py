@@ -16,16 +16,18 @@ def runtime(f):
 
 
 def no_cache(f):
-    def new_func(*args, **kwargs):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
         response.cache_control.no_cache = True
         return response
-    return update_wrapper(new_func, f)
+    return wrapper
 
 
 def cache(f):
-    def new_func(*args, **kwargs):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
         response.cache_control.s_maxage = app.config.get('CACHE_S_MAXAGE')
         return response
-    return update_wrapper(new_func, f)
+    return wrapper
