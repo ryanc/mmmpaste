@@ -5,6 +5,9 @@ from mmmpaste import app
 
 
 def runtime(f):
+    """
+    Add a header that shows the runtime of the route.
+    """
     @wraps(f)
     def wrapper(*args, **kwargs):
         start = now()
@@ -16,6 +19,9 @@ def runtime(f):
 
 
 def no_cache(f):
+    """
+    Add "Cache-Control: no-cache" header.
+    """
     @wraps(f)
     def wrapper(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
@@ -25,6 +31,9 @@ def no_cache(f):
 
 
 def cache(f):
+    """
+    Add "Cache-Control: s-maxage" header.
+    """
     @wraps(f)
     def wrapper(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
