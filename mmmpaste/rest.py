@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, abort, make_response, request, url_for
 
 from mmmpaste import db, filters
@@ -25,11 +27,12 @@ def new_paste():
 
 @rest.route("/api/paste/<id>", methods = ["GET"])
 @filters.cache
+@filters.runtime
 def get_paste(id):
     paste = db.get_paste(id)
 
     if paste is None or paste.is_active is False:
-        abort(404)
+        return json_error("Paste not found.", 404)
 
     response = make_response(str(paste.content))
     response.mimetype = "text/plain"
@@ -40,3 +43,14 @@ def get_paste(id):
 def delete_paste(id):
     #db.deactivate_paste(id)
     return "", 204
+
+
+def json_error(message, status_code):
+    return json_response({'error': message}, status_code)
+
+
+def json_response(obj, status_code = 200):
+    text = json.dumps(obj) + "\n"
+    response = make_response(text, status_code)
+    response.headers["Content-Type"] = "application/json"
+    return response
