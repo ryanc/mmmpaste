@@ -5,7 +5,7 @@ from mmmpaste import app, db, forms, filters
 from mmmpaste.rest import rest
 
 # Register the REST API module.
-app.register_blueprint(rest)
+app.register_blueprint(rest, url_prefix = "/api")
 
 
 @app.teardown_request

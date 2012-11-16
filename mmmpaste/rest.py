@@ -12,7 +12,7 @@ def shutdown_session(exception = None):
     db.session.remove()
 
 
-@rest.route("/api/paste", methods = ["POST"])
+@rest.route("/paste", methods = ["POST"])
 def new_paste():
     id = db.new_paste(request.form.get("content"),
                       request.remote_addr,
@@ -25,7 +25,7 @@ def new_paste():
     return response
 
 
-@rest.route("/api/paste/<id>", methods = ["GET"])
+@rest.route("/paste/<id>", methods = ["GET"])
 @filters.cache
 @filters.runtime
 def get_paste(id):
@@ -39,7 +39,7 @@ def get_paste(id):
     return response
 
 
-@rest.route("/api/paste/<id>", methods = ["DELETE"])
+@rest.route("/paste/<id>", methods = ["DELETE"])
 def delete_paste(id):
     #db.deactivate_paste(id)
     return "", 204
