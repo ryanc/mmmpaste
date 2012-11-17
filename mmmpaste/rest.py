@@ -1,6 +1,7 @@
 import json
+from functools import wraps
 
-from flask import Blueprint, abort, make_response, request, url_for
+from flask import Blueprint, abort, make_response, request, url_for, current_app
 
 from mmmpaste import db, filters, helpers
 
@@ -10,6 +11,31 @@ rest = Blueprint("rest", __name__)
 @rest.teardown_request
 def shutdown_session(exception = None):
     db.session.remove()
+
+
+def check_auth(user, password):
+    config = current_app.config
+
+    if "ADMIN_PASSWORD" not in config:
+        return False
+
+    return user == 'admin' and password == config.get("ADMIN_PASSWORD")
+
+
+def authenticate():
+    response = make_response("", 401)
+    response.headers["WWW-Authenticate"] = "Basic"
+    return response
+
+
+def requires_auth(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return fn(*args, **kwargs)
+    return wrapper
 
 
 @rest.route("/paste", methods = ["POST"])
@@ -40,8 +66,9 @@ def get_paste(id):
 
 
 @rest.route("/paste/<id>", methods = ["DELETE"])
+@requires_auth
 def delete_paste(id):
-    #db.deactivate_paste(id)
+    db.deactivate_paste(id)
     return "", 204
 
 
