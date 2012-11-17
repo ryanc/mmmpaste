@@ -20,7 +20,7 @@ def new_paste():
                       request.form.get("highlight", True),
                       request.form.get("convert_tabs", True))
 
-    response = make_response("", 201)
+    response = json_response({"id": id}, 201)
     response.headers["Location"] = url_for("get_paste", id = id)
     return response
 
