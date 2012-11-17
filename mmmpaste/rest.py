@@ -57,7 +57,7 @@ def new_paste():
 def get_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None or paste.is_active is False:
+    if paste is None:
         return json_error("Paste not found.", 404)
 
     response = make_response(str(paste.content))

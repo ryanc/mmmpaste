@@ -35,7 +35,7 @@ def root():
 def get_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None or paste.is_active is False:
+    if paste is None:
         error = "This paste is no longer available."
         return render_template("error.html", error = error), 404
 
@@ -77,7 +77,7 @@ def about():
 def get_raw_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None or paste.is_active is False:
+    if paste is None:
         error = "This paste is no longer available."
         return render_template("error.html", error = error), 404
 
@@ -91,7 +91,7 @@ def get_raw_paste(id):
 def download_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None or paste.is_active is False:
+    if paste is None:
         error = "This paste is no longer available."
         return render_template("error.html", error = error), 404
 
@@ -109,7 +109,7 @@ def download_paste(id):
 def clone_paste(id):
     paste = db.get_paste(id)
 
-    if paste is None or paste.is_active is False:
+    if paste is None:
         error = "This paste is no longer available."
         return render_template("error.html", error = error), 404
 

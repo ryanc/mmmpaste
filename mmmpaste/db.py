@@ -72,7 +72,7 @@ def get_paste(id_b62 = None):
     if id_b62 is None:
         return session.query(Paste).order_by(Paste.id.desc()).first()
 
-    return session.query(Paste).filter_by(id_b62 = id_b62).first()
+    return session.query(Paste).filter_by(id_b62 = id_b62, is_active = True).first()
 
 
 def delete_paste(id_b62 = None):
