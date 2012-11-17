@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, abort, url_for, \
                   make_response, session, flash
 
-from mmmpaste import app, db, forms, filters
+from mmmpaste import app, db, forms, filters, helpers
 from mmmpaste.rest import rest
 
 # Register the REST API module.
@@ -47,7 +47,7 @@ def get_paste(id):
 def new_paste():
     form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
-        id = db.new_paste(form.content.data, request.remote_addr,
+        id = db.new_paste(form.content.data, helpers.get_ip()
                           form.filename.data, form.highlight.data,
                           form.convert_tabs.data)
         if "pastes" not in session:

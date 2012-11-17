@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, abort, make_response, request, url_for
 
-from mmmpaste import db, filters
+from mmmpaste import db, filters, helpers
 
 rest = Blueprint("rest", __name__)
 
@@ -15,7 +15,7 @@ def shutdown_session(exception = None):
 @rest.route("/paste", methods = ["POST"])
 def new_paste():
     id = db.new_paste(request.form.get("content"),
-                      request.remote_addr,
+                      helpers.get_ip(),
                       request.form.get("filename", None),
                       request.form.get("highlight", True),
                       request.form.get("convert_tabs", True))
