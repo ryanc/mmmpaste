@@ -130,6 +130,7 @@ def delete_paste(id):
 
 
 @app.route("/latest")
+@filters.no_cache
 def get_latest_paste():
     paste = db.get_paste()
     return redirect(url_for("get_paste", id = paste.id_b62), 307)
