@@ -70,7 +70,7 @@ def get_paste(id_b62 = None):
     """
     from mmmpaste.models import Paste
     if id_b62 is None:
-        return session.query(Paste).order_by(Paste.id.desc()).first()
+        return session.query(Paste).filter_by(is_active = True).order_by(Paste.id.desc()).first()
 
     return session.query(Paste).filter_by(id_b62 = id_b62, is_active = True).first()
 
