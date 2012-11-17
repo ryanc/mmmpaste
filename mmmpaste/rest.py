@@ -24,7 +24,7 @@ def check_auth(user, password):
 
 def authenticate():
     response = make_response("", 401)
-    response.headers["WWW-Authenticate"] = "Basic"
+    response.headers["WWW-Authenticate"] = 'Basic realm="Mmm Paste"'
     return response
 
 
