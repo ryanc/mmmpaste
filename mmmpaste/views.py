@@ -47,9 +47,12 @@ def get_paste(id):
 def new_paste():
     form = forms.NewPaste(request.form)
     if request.method == "POST" and form.validate():
-        id = db.new_paste(form.content.data, helpers.get_ip(),
-                          form.filename.data, form.highlight.data,
+        id = db.new_paste(form.content.data,
+                          helpers.get_ip(),
+                          form.filename.data,
+                          form.highlight.data,
                           form.convert_tabs.data)
+
         if "pastes" not in session:
             session["pastes"] = []
 
