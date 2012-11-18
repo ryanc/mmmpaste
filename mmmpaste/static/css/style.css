@@ -90,7 +90,7 @@ textarea {
   width: 100%;
   height: 400px;
   font-family: monospace;
-  border-collapse: collapse:
+  padding: 0;
 }
 pre {
   margin: 0;
