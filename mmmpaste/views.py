@@ -133,4 +133,9 @@ def delete_paste(id):
 @filters.no_cache
 def get_latest_paste():
     paste = db.get_paste()
+
+    if paste is None:
+        error = "The pastebin is empty."
+        return render_template("error.html", error = error), 404
+
     return redirect(url_for("get_paste", id = paste.id_b62), 307)
