@@ -1,2 +1,3 @@
 recursive-include mmmpaste/templates *
 recursive-include mmmpaste/static *
+include LICENSE.txt
