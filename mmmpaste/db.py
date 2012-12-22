@@ -5,8 +5,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 from hashlib import md5
+from urllib import quote_plus as urlquote
 
-engine = create_engine("sqlite:///db/pastebin.db")
+import settings
+
+engine = create_engine(settings.DATABASE_URL)
 session = scoped_session(sessionmaker(bind = engine, autoflush = False))
 
 Base = declarative_base(bind = engine)

@@ -43,7 +43,7 @@ class Content(Base):
     hash = Column(CHAR(32), unique = True, nullable = False)
     created_at = Column(DateTime, nullable = False, default = datetime.datetime.now)
     modified_at = Column(DateTime, onupdate = datetime.datetime.now)
-    content = Column(Text, unique = True, nullable = False)
+    content = Column(Text, nullable = False)
 
     convert_tabs = True
 
