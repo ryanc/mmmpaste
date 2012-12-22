@@ -7,7 +7,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from hashlib import md5
 from urllib import quote_plus as urlquote
 
-import settings
+from mmmpaste import settings
 
 engine = create_engine(settings.DATABASE_URL)
 session = scoped_session(sessionmaker(bind = engine, autoflush = False))
