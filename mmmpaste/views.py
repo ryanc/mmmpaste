@@ -142,3 +142,6 @@ def get_latest_paste():
         return render_template("error.html", error = error), 404
 
     return redirect(url_for("get_paste", id = paste.id_b62), 307)
+
+
+app.jinja_env.globals['GOOGLE_TRACKING_ID'] = app.config.get('GOOGLE_TRACKING_ID', None)
